@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd"
+>
+
+
+
+    <bean id="helloWord" class="com.share.charge.test.HelloWorld">
+        <property name="name" value="徐代龙"></property>
+        <property name="age" value="25"></property>
+    </bean>
+
+
+<!--    spring 整合 mybatis-->
+    <!--
+          用途1：Spring的xml配置文件中，可以通过${属性名}使用properties文件配置的值
+          用途2：可以使用@Value("${属性名}")注解读取properties文件配置的值，再给字段赋值
+                 方法1：注解在字段上，给字段赋值
+                 方法2：注解在字段的setter方法中赋值
+    -->
+    <context:property-placeholder location="classpath:mybatis_db.properties"/>
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis_config.xml"/>
+    </bean>
+    <bean id="guestMapper"
+          class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.share.charge.mybatis.generator.mapper.GuestMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+
+</beans>
