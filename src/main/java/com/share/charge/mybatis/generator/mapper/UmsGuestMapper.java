@@ -1,9 +1,7 @@
 package com.share.charge.mybatis.generator.mapper;
 
 import com.share.charge.mybatis.generator.model.UmsGuest;
-import org.apache.ibatis.annotations.Mapper;
 
-@Mapper
 public interface UmsGuestMapper {
     int deleteByPrimaryKey(Integer id);
 

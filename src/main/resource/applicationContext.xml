@@ -47,9 +47,9 @@
         <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
     <!-- 配置mybatis mapper接口 -->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.share.charge.mybatis.generator.mapper"/>
-        <property name="sqlSessionTemplateBeanName" value="sqlSessionTemplate"/>
-    </bean>
+<!--    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
+<!--        <property name="basePackage" value="com.share.charge.mybatis.generator.mapper"/>-->
+<!--        <property name="sqlSessionTemplateBeanName" value="sqlSessionTemplate"/>-->
+<!--    </bean>-->
 
 </beans>

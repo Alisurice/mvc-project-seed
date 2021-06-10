@@ -12,12 +12,12 @@
     <!-- 开启注解扫描 -->
     <context:component-scan base-package="com.share.charge"/>
     <!-- 视图解析器对象 -->
-<!--    <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
-<!--        &lt;!&ndash; 前缀（目录） &ndash;&gt;-->
-<!--        <property name="prefix" value="/WEB-INF/"/>-->
-<!--        &lt;!&ndash; 后缀 &ndash;&gt;-->
-<!--        <property name="suffix" value=".html"/>-->
-<!--    </bean>-->
+    <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- 前缀（目录） -->
+        <property name="prefix" value="/"/>
+        <!-- 后缀 -->
+        <property name="suffix" value=".html"/>
+    </bean>
     <!-- 开启SpringMVC框架注解的支持 -->
     <mvc:annotation-driven/>
 </beans>
