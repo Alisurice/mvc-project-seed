@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.share.charge.mybatis.generator.mapper.OmsOrderMapper">
+  <resultMap id="BaseResultMap" type="com.share.charge.mybatis.generator.model.OmsOrder">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="guest_id" jdbcType="INTEGER" property="guestId" />
+    <result column="charge_id" jdbcType="INTEGER" property="chargeId" />
+    <result column="borrow_cabinet_id" jdbcType="INTEGER" property="borrowCabinetId" />
+    <result column="return_cabinet_id" jdbcType="INTEGER" property="returnCabinetId" />
+    <result column="borrow_time_seconds" jdbcType="BIGINT" property="borrowTimeSeconds" />
+    <result column="return_time_seconds" jdbcType="BIGINT" property="returnTimeSeconds" />
+    <result column="m_bill" jdbcType="DOUBLE" property="mBill" />
+    <result column="m_prepayment" jdbcType="DOUBLE" property="mPrepayment" />
+    <result column="m_balance" jdbcType="DOUBLE" property="mBalance" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, guest_id, charge_id, borrow_cabinet_id, return_cabinet_id, borrow_time_seconds, 
+    return_time_seconds, m_bill, m_prepayment, m_balance
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from oms_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from oms_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.share.charge.mybatis.generator.model.OmsOrder">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into oms_order (guest_id, charge_id, borrow_cabinet_id, 
+      return_cabinet_id, borrow_time_seconds, return_time_seconds, 
+      m_bill, m_prepayment, m_balance
+      )
+    values (#{guestId,jdbcType=INTEGER}, #{chargeId,jdbcType=INTEGER}, #{borrowCabinetId,jdbcType=INTEGER}, 
+      #{returnCabinetId,jdbcType=INTEGER}, #{borrowTimeSeconds,jdbcType=BIGINT}, #{returnTimeSeconds,jdbcType=BIGINT}, 
+      #{mBill,jdbcType=DOUBLE}, #{mPrepayment,jdbcType=DOUBLE}, #{mBalance,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.share.charge.mybatis.generator.model.OmsOrder">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into oms_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="guestId != null">
+        guest_id,
+      </if>
+      <if test="chargeId != null">
+        charge_id,
+      </if>
+      <if test="borrowCabinetId != null">
+        borrow_cabinet_id,
+      </if>
+      <if test="returnCabinetId != null">
+        return_cabinet_id,
+      </if>
+      <if test="borrowTimeSeconds != null">
+        borrow_time_seconds,
+      </if>
+      <if test="returnTimeSeconds != null">
+        return_time_seconds,
+      </if>
+      <if test="mBill != null">
+        m_bill,
+      </if>
+      <if test="mPrepayment != null">
+        m_prepayment,
+      </if>
+      <if test="mBalance != null">
+        m_balance,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="guestId != null">
+        #{guestId,jdbcType=INTEGER},
+      </if>
+      <if test="chargeId != null">
+        #{chargeId,jdbcType=INTEGER},
+      </if>
+      <if test="borrowCabinetId != null">
+        #{borrowCabinetId,jdbcType=INTEGER},
+      </if>
+      <if test="returnCabinetId != null">
+        #{returnCabinetId,jdbcType=INTEGER},
+      </if>
+      <if test="borrowTimeSeconds != null">
+        #{borrowTimeSeconds,jdbcType=BIGINT},
+      </if>
+      <if test="returnTimeSeconds != null">
+        #{returnTimeSeconds,jdbcType=BIGINT},
+      </if>
+      <if test="mBill != null">
+        #{mBill,jdbcType=DOUBLE},
+      </if>
+      <if test="mPrepayment != null">
+        #{mPrepayment,jdbcType=DOUBLE},
+      </if>
+      <if test="mBalance != null">
+        #{mBalance,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.share.charge.mybatis.generator.model.OmsOrder">
+    update oms_order
+    <set>
+      <if test="guestId != null">
+        guest_id = #{guestId,jdbcType=INTEGER},
+      </if>
+      <if test="chargeId != null">
+        charge_id = #{chargeId,jdbcType=INTEGER},
+      </if>
+      <if test="borrowCabinetId != null">
+        borrow_cabinet_id = #{borrowCabinetId,jdbcType=INTEGER},
+      </if>
+      <if test="returnCabinetId != null">
+        return_cabinet_id = #{returnCabinetId,jdbcType=INTEGER},
+      </if>
+      <if test="borrowTimeSeconds != null">
+        borrow_time_seconds = #{borrowTimeSeconds,jdbcType=BIGINT},
+      </if>
+      <if test="returnTimeSeconds != null">
+        return_time_seconds = #{returnTimeSeconds,jdbcType=BIGINT},
+      </if>
+      <if test="mBill != null">
+        m_bill = #{mBill,jdbcType=DOUBLE},
+      </if>
+      <if test="mPrepayment != null">
+        m_prepayment = #{mPrepayment,jdbcType=DOUBLE},
+      </if>
+      <if test="mBalance != null">
+        m_balance = #{mBalance,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.share.charge.mybatis.generator.model.OmsOrder">
+    update oms_order
+    set guest_id = #{guestId,jdbcType=INTEGER},
+      charge_id = #{chargeId,jdbcType=INTEGER},
+      borrow_cabinet_id = #{borrowCabinetId,jdbcType=INTEGER},
+      return_cabinet_id = #{returnCabinetId,jdbcType=INTEGER},
+      borrow_time_seconds = #{borrowTimeSeconds,jdbcType=BIGINT},
+      return_time_seconds = #{returnTimeSeconds,jdbcType=BIGINT},
+      m_bill = #{mBill,jdbcType=DOUBLE},
+      m_prepayment = #{mPrepayment,jdbcType=DOUBLE},
+      m_balance = #{mBalance,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

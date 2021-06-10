@@ -1,6 +1,6 @@
 package com.share.charge.mybatis.generator.model;
 
-public class Guest {
+public class UmsAdmin {
     private Integer id;
 
     private String username;

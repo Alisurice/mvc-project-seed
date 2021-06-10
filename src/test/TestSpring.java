@@ -1,4 +1,5 @@
-import com.share.charge.mybatis.generator.mapper.GuestMapper;
+
+import com.share.charge.mybatis.generator.mapper.UmsGuestMapper;
 import com.share.charge.test.HelloWorld;
 
 import org.apache.ibatis.io.Resources;
@@ -22,7 +23,7 @@ public class TestSpring {
     private HelloWorld helloWorld;
 
 //    @Autowired
-//    private GuestMapper guestMapper;
+//    private GuestMapper umsGuestMapper;
 
     @Test
     public void testBean() {
@@ -43,7 +44,7 @@ public class TestSpring {
 
         //1.获取到sqlsession 不会自动提交数据
         SqlSession openSession = sqlSessionFactory.openSession();
-        GuestMapper mapper = openSession.getMapper(GuestMapper.class);
+        UmsGuestMapper mapper = openSession.getMapper(UmsGuestMapper.class);
 
         System.out.println(mapper.selectByPrimaryKey(0));
 
@@ -57,12 +58,14 @@ public class TestSpring {
 
 
     @Autowired
-    private GuestMapper guestMapper;
+    private UmsGuestMapper umsGuestMapper;
     @Autowired
     ApplicationContext applicationContext;
     @Test
     public void testSpringMybatis(){
-        guestMapper = applicationContext.getBean(GuestMapper.class);
-        System.out.println(guestMapper.selectByPrimaryKey(0));
+        umsGuestMapper = applicationContext.getBean(UmsGuestMapper.class);
+        System.out.println(umsGuestMapper.selectByPrimaryKey(0));
+//        Guest guest = new Guest();
+//        guest.toString();
     }
 }

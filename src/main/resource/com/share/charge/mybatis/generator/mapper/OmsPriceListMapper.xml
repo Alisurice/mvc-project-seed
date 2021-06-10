@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.share.charge.mybatis.generator.mapper.OmsPriceListMapper">
+  <resultMap id="BaseResultMap" type="com.share.charge.mybatis.generator.model.OmsPriceList">
+    <id column="min_time_seconds" jdbcType="BIGINT" property="minTimeSeconds" />
+    <result column="max_time_seconds" jdbcType="BIGINT" property="maxTimeSeconds" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    min_time_seconds, max_time_seconds, price
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from oms_price_list
+    where min_time_seconds = #{minTimeSeconds,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from oms_price_list
+    where min_time_seconds = #{minTimeSeconds,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.share.charge.mybatis.generator.model.OmsPriceList">
+    insert into oms_price_list (min_time_seconds, max_time_seconds, price
+      )
+    values (#{minTimeSeconds,jdbcType=BIGINT}, #{maxTimeSeconds,jdbcType=BIGINT}, #{price,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.share.charge.mybatis.generator.model.OmsPriceList">
+    insert into oms_price_list
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="minTimeSeconds != null">
+        min_time_seconds,
+      </if>
+      <if test="maxTimeSeconds != null">
+        max_time_seconds,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="minTimeSeconds != null">
+        #{minTimeSeconds,jdbcType=BIGINT},
+      </if>
+      <if test="maxTimeSeconds != null">
+        #{maxTimeSeconds,jdbcType=BIGINT},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.share.charge.mybatis.generator.model.OmsPriceList">
+    update oms_price_list
+    <set>
+      <if test="maxTimeSeconds != null">
+        max_time_seconds = #{maxTimeSeconds,jdbcType=BIGINT},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where min_time_seconds = #{minTimeSeconds,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.share.charge.mybatis.generator.model.OmsPriceList">
+    update oms_price_list
+    set max_time_seconds = #{maxTimeSeconds,jdbcType=BIGINT},
+      price = #{price,jdbcType=DOUBLE}
+    where min_time_seconds = #{minTimeSeconds,jdbcType=BIGINT}
+  </update>
+</mapper>
