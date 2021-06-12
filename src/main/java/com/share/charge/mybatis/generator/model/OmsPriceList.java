@@ -30,4 +30,17 @@ public class OmsPriceList {
     public void setPrice(Double price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", minTimeSeconds=").append(minTimeSeconds);
+        sb.append(", maxTimeSeconds=").append(maxTimeSeconds);
+        sb.append(", price=").append(price);
+        sb.append("]");
+        return sb.toString();
+    }
 }

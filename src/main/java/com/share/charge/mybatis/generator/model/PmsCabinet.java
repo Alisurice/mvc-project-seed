@@ -20,7 +20,7 @@ public class PmsCabinet {
     }
 
     public void setPosition(String position) {
-        this.position = position == null ? null : position.trim();
+        this.position = position;
     }
 
     public Integer getMaxCharge() {
@@ -29,5 +29,18 @@ public class PmsCabinet {
 
     public void setMaxCharge(Integer maxCharge) {
         this.maxCharge = maxCharge;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", position=").append(position);
+        sb.append(", maxCharge=").append(maxCharge);
+        sb.append("]");
+        return sb.toString();
     }
 }

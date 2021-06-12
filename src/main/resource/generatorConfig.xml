@@ -5,14 +5,22 @@
 
 <generatorConfiguration>
 
-    <context id="testTables" targetRuntime="MyBatis3">
+    <context id="MySqlContext" targetRuntime="MyBatis3" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!-- 为生成的Java模型创建一个toString方法 -->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
         <!--生成mapper.xml时覆盖原文件-->
-        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
-
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
         <commentGenerator>
             <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
             <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+            <property name="addRemarkComments" value="true"/>
         </commentGenerator>
+
+
         <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
         <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
                         connectionURL="jdbc:mysql://localhost:3306/charge_share_system?useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=Asia/Shanghai"
@@ -29,42 +37,33 @@
         <!-- targetProject:生成PO类的位置 -->
         <javaModelGenerator targetPackage="com.share.charge.mybatis.generator.model"
                             targetProject=".\src\main\java">
-            <!-- enableSubPackages:是否让schema作为包的后缀 -->
-            <property name="enableSubPackages" value="false"/>
-            <!-- 从数据库返回的值被清理前后的空格 -->
-            <property name="trimStrings" value="true"/>
+
         </javaModelGenerator>
 
         <!-- targetProject:mapper映射文件生成的位置 -->
         <sqlMapGenerator targetPackage="com.share.charge.mybatis.generator.mapper"
                          targetProject=".\src\main\resource">
-            <!-- enableSubPackages:是否让schema作为包的后缀 -->
-            <property name="enableSubPackages" value="false"/>
+
         </sqlMapGenerator>
         <!-- targetPackage：mapper接口生成的位置 -->
         <javaClientGenerator type="XMLMAPPER"
                              targetPackage="com.share.charge.mybatis.generator.mapper"
                              targetProject=".\src\main\java">
-            <!-- enableSubPackages:是否让schema作为包的后缀 -->
-            <property name="enableSubPackages" value="false"/>
+
         </javaClientGenerator>
         <!--取消一些没必要生成的方法-->
 
-<!--        <table tableName="%"-->
-<!--               domainObjectName="%"-->
-<!--               enableCountByExample="false"-->
-<!--               enableDeleteByExample="false"-->
-<!--               enableSelectByExample="false"-->
-<!--               enableUpdateByExample="false">-->
-<!--&lt;!&ndash;            <generatedKey column="id" sqlStatement="MySql" identity="true"/>&ndash;&gt;-->
+        <!--        <table tableName="%"-->
+        <!--               domainObjectName="%"-->
+        <!--               enableCountByExample="false"-->
+        <!--               enableDeleteByExample="false"-->
+        <!--               enableSelectByExample="false"-->
+        <!--               enableUpdateByExample="false">-->
+        <!--&lt;!&ndash;            <generatedKey column="id" sqlStatement="MySql" identity="true"/>&ndash;&gt;-->
 
-<!--        </table>-->
+        <!--        </table>-->
         <!--生成全部表tableName设为%-->
-        <table tableName="%"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false">
+        <table tableName="%" >
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
 

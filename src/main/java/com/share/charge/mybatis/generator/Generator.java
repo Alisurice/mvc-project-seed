@@ -6,48 +6,28 @@ import org.mybatis.generator.config.xml.ConfigurationParser;
 import org.mybatis.generator.internal.DefaultShellCallback;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Generator {
-    public void generator() throws Exception{
-
-        List<String> warnings = new ArrayList<String>();
-
-        boolean overwrite = true;
-
-        /**指向逆向工程配置文件*/
-
-        File configFile = new File("src/main/java/com/share/charge/mybatis/generator/generatorConfig.xml");
-        System.out.println(configFile.getAbsolutePath());
-        ConfigurationParser parser = new ConfigurationParser(warnings);
-
-        Configuration config = parser.parseConfiguration(configFile);
-
-        DefaultShellCallback callback = new DefaultShellCallback(overwrite);
-
-        MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config,
-
-                callback, warnings);
-
-        myBatisGenerator.generate(null);
-
-    }
-
     public static void main(String[] args) throws Exception {
+        //MBG执行过程中的警告信息
+        List<String> warnings = new ArrayList<String>();
+        //生成代码重复时，是否覆盖源代码
+        boolean override = false;
+        InputStream in = Thread.currentThread().getContextClassLoader().getResourceAsStream("generatorConfig.xml");
+        ConfigurationParser cp = new ConfigurationParser(warnings);
+        Configuration config = cp.parseConfiguration(in);
 
-        try {
-
-            Generator generatorSqlmap = new Generator();
-
-            generatorSqlmap.generator();
-
-        } catch (Exception e) {
-
-            e.printStackTrace();
-
+        DefaultShellCallback callback = new DefaultShellCallback(override);
+        //创建MBG
+        MyBatisGenerator mbg = new MyBatisGenerator(config, callback, warnings);
+        mbg.generate(null);
+        //输出警告信息
+        for (String warn : warnings) {
+            System.out.println(warn);
         }
-
     }
 
 }

@@ -100,4 +100,24 @@ public class OmsOrder {
     public void setmBalance(Double mBalance) {
         this.mBalance = mBalance;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", guestId=").append(guestId);
+        sb.append(", chargeId=").append(chargeId);
+        sb.append(", borrowCabinetId=").append(borrowCabinetId);
+        sb.append(", returnCabinetId=").append(returnCabinetId);
+        sb.append(", borrowTimeSeconds=").append(borrowTimeSeconds);
+        sb.append(", returnTimeSeconds=").append(returnTimeSeconds);
+        sb.append(", mBill=").append(mBill);
+        sb.append(", mPrepayment=").append(mPrepayment);
+        sb.append(", mBalance=").append(mBalance);
+        sb.append("]");
+        return sb.toString();
+    }
 }

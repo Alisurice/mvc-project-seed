@@ -38,6 +38,20 @@ public class PmsCharge {
     }
 
     public void setBorrowStatus(String borrowStatus) {
-        this.borrowStatus = borrowStatus == null ? null : borrowStatus.trim();
+        this.borrowStatus = borrowStatus;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", cabinetId=").append(cabinetId);
+        sb.append(", powerLevel=").append(powerLevel);
+        sb.append(", borrowStatus=").append(borrowStatus);
+        sb.append("]");
+        return sb.toString();
     }
 }
