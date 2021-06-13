@@ -41,16 +41,16 @@
         如果xml和mapper接口在同名包内，那么mapperLocations属性可以省略，
         只要配置好下面的bean：MapperScannerConfigurer
 -->
-        <property name="mapperLocations" >
-            <array>
-                <value>classpath:com/share/charge/mybatis/generator/mapper/*.xml</value>
-            </array>
-        </property>
+<!--        <property name="mapperLocations" >-->
+<!--            <array>-->
+<!--                <value>classpath:com/share/charge/mybatis/generator/mapper/*.xml</value>-->
+<!--            </array>-->
+<!--        </property>-->
     </bean>
 
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.share.charge.mybatis.generator.mapper"/>
-    </bean>
+<!--    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
+<!--        <property name="basePackage" value="com.share.charge.mybatis.generator.mapper"/>-->
+<!--    </bean>-->
 <!--    也可以不在这里，而在mybatis_config.xml中配置mapper接口的扫描器-->
 <!--    可以发现mapper xml基本上是自动加载的？-->
 <!--    也不是，应该是因为配置了mapper接口，所以可以根据接口自动获取xml。-->
