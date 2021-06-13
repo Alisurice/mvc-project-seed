@@ -20,6 +20,8 @@ public interface UmsAdminMapper {
 
     UmsAdmin selectByPrimaryKey(@Param("id") Integer id, @Param("username") String username);
 
+    UmsAdmin login(UmsAdmin record);
+
     int updateByExampleSelective(@Param("record") UmsAdmin record, @Param("example") UmsAdminExample example);
 
     int updateByExample(@Param("record") UmsAdmin record, @Param("example") UmsAdminExample example);

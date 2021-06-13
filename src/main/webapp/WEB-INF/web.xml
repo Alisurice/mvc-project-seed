@@ -7,6 +7,16 @@
 
     <display-name>Archetype Created Web Application</display-name>
 
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:applicationContext.xml</param-value>
+    </context-param>
+    <!-- 这个比较关键：通过Listener来加载IOC容器上下文，就是一个桥梁 -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
     <!-- Spring MVC servlet -->
     <servlet>
         <servlet-name>dispatcherServlet</servlet-name>
@@ -64,5 +74,6 @@
         <filter-name>charactorEncoding</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
 
 </web-app>

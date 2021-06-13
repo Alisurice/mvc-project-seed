@@ -14,6 +14,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -32,7 +33,6 @@ public class TestSpring {
     }
 
 
-    @Autowired
 
     /**
      * test mybatis
@@ -49,9 +49,11 @@ public class TestSpring {
         //1.获取到sqlsession 不会自动提交数据
         SqlSession openSession = sqlSessionFactory.openSession();
         UmsGuestMapper mapper = openSession.getMapper(UmsGuestMapper.class);
-        UmsGuest umsGuest = new UmsGuest();
-        umsGuest.setId(0);
-        System.out.println(mapper.selectByExample());
+        UmsGuest umsGuest = mapper.selectByPrimaryKey(1,"1");
+
+        if(umsGuest !=null ){
+            System.out.println(umsGuest.toString());
+        }
 
         //手动提交数据
         openSession.commit();
@@ -60,6 +62,18 @@ public class TestSpring {
 
     }
 
+    @Resource
+    private UmsGuestMapper umsGuestMapper;
+    @Test
+    public void testAutoMapper()throws IOException{
+        UmsGuest umsGuest = umsGuestMapper.selectByPrimaryKey(1,"1");
+
+        if(umsGuest !=null ){
+            System.out.println(umsGuest.toString());
+        }
+
+
+    }
 
 
 //    @Autowired
