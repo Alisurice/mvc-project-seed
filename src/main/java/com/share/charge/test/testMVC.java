@@ -2,6 +2,7 @@ package com.share.charge.test;
 
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -14,5 +15,12 @@ public class testMVC {
     @ResponseBody
     public String hello(HttpServletRequest request, HttpServletResponse response){
         return "index";
+    }
+
+    @RequestMapping("/thy")
+    public  String testThy(Model model){
+//        model.addAttribute("message","login page");
+        model.addAttribute("loginApi","abc/def");
+        return "WEB-INF/views/testthy.html";
     }
 }
