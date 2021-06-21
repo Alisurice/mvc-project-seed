@@ -59,7 +59,13 @@ public class LoginGuestController {
      */
     private void setLoginPage(HttpSession session,HttpServletRequest request,
                               String userType, String loginApi){
-        session.setAttribute("loginApi", request.getContextPath()+loginApi);
+//        session.setAttribute("loginApi", request.getContextPath()+loginApi);
+//        使用了jstl
+//                <form action="<c:url value='${loginApi}'/>" method="post">
+//                所以不需要加request
+        session.setAttribute("loginApi", loginApi);
+
+
         session.setAttribute("userType", userType);
     }
 

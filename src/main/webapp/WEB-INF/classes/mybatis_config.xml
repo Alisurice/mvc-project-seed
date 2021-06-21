@@ -22,6 +22,7 @@
             </dataSource>
         </environment>
     </environments>
+<!--    不整合spring和mybatis，直接用Mybatis的getMapper方法时，就必须要配置这里了。-->
 <!--    <mappers>-->
 <!--&lt;!&ndash;        <mapper resource="BookDaoMapper.xml"/>&ndash;&gt;-->
 <!--        <package name="com.share.charge.mybatis.generator.mapper"/>-->

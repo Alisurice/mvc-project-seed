@@ -10,7 +10,7 @@
 <h2>Login</h2>
 
 
-<form action="${loginApi}" method="post">
+<form action="<c:url value='${loginApi}'/>" method="post">
     用户名：<input type="text" name="username"><br><br>
     密  码：<input type="text" name="password"><br><br>
     <input type="submit" value="提交">
