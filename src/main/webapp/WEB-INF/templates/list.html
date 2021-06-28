@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+
+<div th:fragment="pageList(pageKeySet, pageInfo,updateApi,deleteApi)" >
+    <p th:if="${pageKeySet} == 'EMPTY'">empty list</p>
+    <table th:if="${pageKeySet} != 'EMPTY'" class="table table-hover">
+        <thead>
+        <tr>
+            <th:block th:each="key :${pageKeySet}">
+                <th th:text="${key}">test</th>
+            </th:block>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${pageInfo.list}">
+            <th:block th:each="key :${pageKeySet}">
+                <td th:text="${user[key]}">neo</td>
+            </th:block>
+
+            <td><a id="edit"
+                   th:onclick="|updatePassword('@{${updateApi}}','${user.id}')|"
+                   th:href="'javascript:void(0)'">edit</a></td>
+            <td><a onclick="return confirm('确定删除吗？')"
+                   th:href="@{${deleteApi}+'/'}+${user.id}">delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <script type="text/javascript" th:inline="javascript">
+        function updatePassword(updateApi,userId)
+        {
+            var result=prompt("Please new password","")
+
+            if (result!=null && result!="")
+            {
+
+                var url = updateApi+'/'+ userId +'/'+result;
+                // console.log(url);
+                window.location.href=url;
+            }
+        }
+    </script>
+
+</div>
+
+<div th:fragment="currentPage(pageInfo)" >
+    当前第[[${pageInfo.pageNum}]]页，共[[${pageInfo.pages}]]页，共[[${pageInfo.total}]]条记录
+</div>
+
+
+<!-- 分页导航条 -->
+<div th:fragment="pagenation(url, pageInfo)" class="pagenation">
+
+    <a th:href="@{${url}}">
+        <span class="btn-page btn-default">首页</span>
+    </a>
+    <a th:href="@{${url}(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">
+        <span class="btn-page btn-default">上一页</span>
+    </a>
+
+    <!--    遍历导航页-->
+    <a th:each="page,pageStat:${pageInfo.navigatepageNums}"
+       th:href="@{${url}(pageNum=${page})}">
+        <span th:if="${page}==${pageInfo.pageNum}">
+            <span class="btn-page btn-active" th:text="${page}"></span>
+        </span>
+        <span th:if="${page}!=${pageInfo.pageNum}">
+            <span class="btn-page btn-default" th:text="${page}"></span>
+        </span>
+    </a>
+    <!--    导航页-->
+
+    <a th:href="@{${url}(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">
+        <span class="btn-page btn-default">下一页</span>
+    </a>
+    <a th:href="@{${url}(pageNum=${pageInfo.pages})}">
+        <span class="btn-page btn-default">尾页</span>
+    </a>
+</div>
+</body>
+</html>

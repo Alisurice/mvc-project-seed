@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+
+<div th:fragment="editItem(item,updateApi)" >
+    <form th:action="@{${updateApi}}" method="post">
+        <label>id</label><input name="id" th:value="${item.id}"><br/>
+        <label>修改位置</label><input type="text" name="powerLevel" th:placeholder="${item.position}"><br/>
+        <label>修改最大容量</label><input type="number" name="cabinetId" th:placeholder="${item.maxCharge}"><br/>
+        <label>已用容量</label><input th:placeholder="${item.chargeList.size()}" readonly="true"/><br/>
+
+        <input type="submit" value="修改">
+    </form>
+
+    <script type="text/javascript" th:inline="javascript">
+        function updatePassword(updateApi,userId)
+        {
+            var result=prompt("Please new password","")
+
+            if (result!=null && result!="")
+            {
+
+                var url = updateApi+'/'+ userId +'/'+result;
+                // console.log(url);
+                window.location.href=url;
+            }
+        }
+    </script>
+
+</div>
+
+</body>
+</html>

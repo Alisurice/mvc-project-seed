@@ -1,6 +1,6 @@
 package com.share.charge.mybatis.generator.model;
 
-public class UmsAdmin {
+public class UmsAdmin extends UmsUser{
     private Integer id;
 
     private String username;

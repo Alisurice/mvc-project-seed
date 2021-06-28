@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${indexVO.title}"></title>
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover {
+            background-color: #111;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li><a th:href="@{|/${indexVO.userType}/login|}">登录</a></li>
+    <li><a th:href="@{|/${indexVO.userType}/register|}">注册</a></li>
+
+</ul>
+
+<h2 th:text="${indexVO.title}">Login</h2>
+<form th:action="@{${indexVO.api}}" method="post">
+    用户名：<input type="text" name="username"><br><br>
+    密  码：<input type="text" name="password"><br><br>
+    <input type="submit" value="提交">
+</form>
+<!--<div th:replace="WEB-INF/templates/list.html::copy">adsf</div>-->
+<!--<div th:replace="~{list::copy}">adsf</div>-->
+
+
+<p th:text="${indexVO.resultMessage}"></p>
+</body>
+
+</html>

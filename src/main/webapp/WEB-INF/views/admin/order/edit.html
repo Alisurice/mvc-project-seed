@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>EditCharge</title>
+    <link rel="stylesheet" th:href="@{/static/list.css}"/>
+</head>
+<body>
+<a th:href="@{/admin/cabinet}">返回机柜列表</a>
+<p>更新订单信息</p>
+<div th:replace="templates/cabinet/edit::
+                editItem(${voCabinetMes},'/admin/cabinet/update')">
+
+</div>
+<p th:text="${resultMessage}"></p>
+
+
+<fieldset style="width: 400px">
+
+    <legend>在柜充电宝情况</legend>
+    <a th:href="@{/admin/charge/search(cabinetId=${voCabinetMes.id})}">进入增加/修改/删除充电宝页面</a>
+    <br/><br/><br/>
+    <div th:replace="templates/cabinet/list::
+                pageList(${chargeKeySet},${voCabinetMes.chargeList},'/admin/charge/update','/admin/charge/delete')"></div>
+
+</fieldset>
+
+</body>
+</html>

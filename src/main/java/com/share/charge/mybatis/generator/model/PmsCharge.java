@@ -1,5 +1,10 @@
 package com.share.charge.mybatis.generator.model;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
 public class PmsCharge {
     private Integer id;
 

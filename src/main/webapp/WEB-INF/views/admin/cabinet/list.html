@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/static/list.css}"/>
+</head>
+<body>
+<!--<p th:text="${pageInfo.list}"></p>-->
+<a th:href="@{/admin/cabinet}">刷新页面</a>
+<div >
+    <form th:action="@{/admin/cabinet/search}" method="get">
+        <label>筛选位置</label>
+        <input type="text" name="position" th:value="${CABINET_SEARCH_POSITION}"/>
+        <input type="submit" value="筛选">
+    </form>
+</div>
+<br/>
+<div th:replace="templates/chargelist::
+                pageList(${pageKeySet},${pageInfo},'/admin/cabinet/update','/admin/cabinet/delete')"></div>
+<p th:text="${resultMessage}"></p>
+<div th:replace="templates/chargelist::currentPage(${pageInfo})">
+    page nation
+</div>
+<div th:replace="templates/chargelist::pagenation('/admin/cabinet',${pageInfo})">
+    page nation
+</div>
+
+<br>
+<br>
+<a th:href="@{/admin/cabinet/insert}">增加机柜</a>
+
+</body>
+</html>

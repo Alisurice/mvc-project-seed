@@ -1,72 +1,57 @@
 package com.share.charge.controller;
 import com.share.charge.mybatis.generator.model.UmsAdmin;
 import com.share.charge.service.LoginRegisterService;
+import com.share.charge.vo.LoginRegisterVO;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 
 @Controller
-
+@SessionAttributes("USER")
 public class LoginGuestController {
     private static final Logger LOGGER = Logger.getLogger(LoginGuestController.class);
+    private LoginRegisterVO loginRegisterVO =
+            new LoginRegisterVO("登录","/admin/login",null,"admin");
+
 
     @RequestMapping(value = "/admin/login",method = RequestMethod.GET)
-    public String login(HttpSession session, HttpServletRequest request){
+    public String login(Model model){
         LOGGER.debug("admin login");
-        setLoginPage(session,
-                request,
-                "Admin",
-                "/admin/login");
-//        LOGGER.debug("return url#"+request.getContextPath()+"/index.jsp");
-        return "/index.jsp";
+
+        model.addAttribute("indexVO",loginRegisterVO);
+        return "index";
     }
 
 
     @Autowired
     LoginRegisterService loginRegisterService;
     @RequestMapping(value = "/admin/login", method = RequestMethod.POST)
-    public String loginApi(UmsAdmin umsAdmin, HttpSession session, HttpServletRequest request){
+    public String loginApi(UmsAdmin umsAdmin,Model model){
         LOGGER.debug("POST#admin login");
         if(loginRegisterService.adminLogin(umsAdmin)==false){
             LOGGER.debug("POST#login failed");
-            session.setAttribute("loginStatus", "登陆失败");
-            setLoginPage(session,
-                    request,
-                    "Admin",
-                    "/admin/login");
+            loginRegisterVO.setResultMessage("登陆失败");
+            model.addAttribute("indexVO",loginRegisterVO);
+            return "index";
         }
         else{
             LOGGER.debug("loginApi#login success");
-            return "/guest/login.html";
+            loginRegisterVO.setResultMessage("登陆成功");
+            model.addAttribute("USER",umsAdmin);
+            model.addAttribute("indexVO",loginRegisterVO);
+            return "redirect:/admin/mainpage.html";
         }
-        return "/501";
+
     }
 
-    /**
-     *
-     * @param session
-     * @param loginApi just input relative path,
-     *                 and request.getContextPath() will joint it.
-     *                 we must do the because <form action=${loginApi}></form>
-     * @param userType
-     */
-    private void setLoginPage(HttpSession session,HttpServletRequest request,
-                              String userType, String loginApi){
-//        session.setAttribute("loginApi", request.getContextPath()+loginApi);
-//        使用了jstl
-//                <form action="<c:url value='${loginApi}'/>" method="post">
-//                所以不需要加request
-        session.setAttribute("loginApi", loginApi);
-
-
-        session.setAttribute("userType", userType);
-    }
 
 }

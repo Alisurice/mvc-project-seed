@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/static/list.css}"/>
+</head>
+<body>
+
+<div th:replace="templates/list::
+                pageList(${pageKeySet},${pageInfo},'/admin/guest-manage/update','/admin/guest-manage/delete')"></div>
+<div th:replace="templates/list::currentPage(${pageInfo})">
+    page nation
+</div>
+<div th:replace="templates/list::pagenation('/admin/guest-manage',${pageInfo})">
+    page nation
+</div>
+</body>
+</html>

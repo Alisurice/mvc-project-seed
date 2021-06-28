@@ -6,6 +6,8 @@
     <properties resource="mybatis_db.properties"></properties>
     <settings>
         <setting name="logImpl" value="LOG4J"/>
+        <!--是否开启自动驼峰命名规则（camel case）映射，即从经典数据库列名 A_COLUMN 到经典Java 属性名 aColumn 的类似映射。 -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
     <typeAliases>
         <package name="system"/>
@@ -22,7 +24,6 @@
             </dataSource>
         </environment>
     </environments>
-<!--    不整合spring和mybatis，直接用Mybatis的getMapper方法时，就必须要配置这里了。-->
 <!--    <mappers>-->
 <!--&lt;!&ndash;        <mapper resource="BookDaoMapper.xml"/>&ndash;&gt;-->
 <!--        <package name="com.share.charge.mybatis.generator.mapper"/>-->

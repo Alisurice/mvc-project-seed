@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>EditCharge</title>
+    <link rel="stylesheet" th:href="@{/static/list.css}"/>
+</head>
+<body>
+<a th:href="@{/admin/charge}">返回充电宝列表</a>
+<p>更新充电宝信息</p>
+<div th:replace="templates/edit::
+                editCharge(${charge},'/admin/charge/update')">
+
+</div>
+<p th:text="${resultMessage}"></p>
+</body>
+</html>

@@ -20,7 +20,7 @@ public class testMVC {
     @RequestMapping("/thy")
     public  String testThy(Model model){
 //        model.addAttribute("message","login page");
-        model.addAttribute("loginApi","abc/def");
+        model.addAttribute("loginApi","/abc/def");
         return "WEB-INF/views/testthy.html";
     }
 }

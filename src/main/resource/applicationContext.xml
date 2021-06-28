@@ -46,12 +46,40 @@
                 <value>classpath:com/share/charge/mybatis/generator/mapper/*.xml</value>
             </array>
         </property>
+        <!-- 传入PageHelper的插件 -->
+        <property name="plugins">
+            <array>
+                <!-- 传入插件的对象 -->
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <value>
+                            helperDialect=mysql
+                            offsetAsPageNum=true
+                            rowBoundsWithCount=true
+                            pageSizeZero=true
+                            reasonable=true
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
 
     </bean>
 
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.share.charge.mybatis.generator.mapper"/>
+<!--    这部分和com.share.charge.config.MyBatisConfig是等效的，只需要选择其中一种方式来扫描mapper
+        不然就会出现warn提示已经存在bean-->
+<!--    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
+<!--        <property name="basePackage" value="com.share.charge.mybatis.generator.mapper"/>-->
+<!--    </bean>-->
+
+    <!--事务管理 1.配置事务管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
     </bean>
+    <!--2.开启事务注解-->
+    <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
+
+
 
 
 
