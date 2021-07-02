@@ -27,4 +27,6 @@ public interface UmsGuestMapper {
     int updateByPrimaryKeySelective(UmsGuest record);
 
     int updateByPrimaryKey(UmsGuest record);
+
+    UmsGuest login(UmsGuest umsGuest);
 }

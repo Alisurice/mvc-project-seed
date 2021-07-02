@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>EditCharge</title>
+    <link rel="stylesheet" th:href="@{/static/list.css}"/>
+</head>
+<body>
+<a th:href="@{/guest/cabinet}">返回机柜列表</a>
+
+<fieldset style="width: 400px">
+
+    <legend>在柜充电宝情况</legend>
+
+    <div th:replace="templates/guest/list::
+                pageList(${chargeKeySet},${voCabinetMes.chargeList},'/guest/charge/update','/guest/charge/delete')"></div>
+
+</fieldset>
+
+</body>
+</html>

@@ -10,4 +10,6 @@ public interface LoginRegisterService {
     public boolean adminLogin(UmsAdmin umsAdmin);
 
     LoginRegisterDTO adminRegister(UmsAdmin umsAdmin);
+
+    LoginRegisterDTO guestRegister(UmsGuest umsGuest);
 }

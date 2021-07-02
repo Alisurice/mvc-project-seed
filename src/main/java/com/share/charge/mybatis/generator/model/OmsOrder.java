@@ -1,5 +1,8 @@
 package com.share.charge.mybatis.generator.model;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 public class OmsOrder {
     private Integer id;
 

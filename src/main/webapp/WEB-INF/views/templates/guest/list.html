@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+
+<div th:fragment="pageList(pageKeySet, pageInfo,updateApi,deleteApi)" >
+    <p th:if="${pageKeySet} == 'EMPTY'">empty list</p>
+    <table th:if="${pageKeySet} != 'EMPTY'" class="table table-hover">
+        <thead>
+        <tr>
+            <th:block th:each="key :${pageKeySet}">
+                <th th:text="${key}">test</th>
+            </th:block>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${pageInfo}">
+            <th:block th:each="key :${pageKeySet}">
+                <td th:text="${user[key]}">neo</td>
+            </th:block>
+
+            <td><a id="borrow"
+                   th:onclick="|updatePassword('@{/guest/order/create}','${user.id}')|"
+                   th:href="'javascript:void(0)'">借出</a></td>
+
+        </tr>
+        </tbody>
+    </table>
+
+    <script type="text/javascript" th:inline="javascript">
+        function updatePassword(updateApi,userId)
+        {
+            var result=confirm("模拟借出\n"+
+                                "借出充电宝id："+userId+
+                                "\n确认支付押金：200元")
+
+            if (result==true)
+            {
+                fetch(updateApi,{
+                    method: 'POST',
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8",
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        chargeId:userId
+                    })
+                })
+                    .then(function (response) {
+                        if (!response.ok) {
+                            throw new Error('HTTP error! status: '+response.status);
+                        } else {
+                            return response.json();
+                        }
+                    })
+                    .then(function (data) {
+                        console.log(data);
+                        console.log(new Date(data.createTime));
+                        if(data.success == true){
+                            confirm("支付成功，请取出充电宝。\n"+"订单id："+data.orderId);
+                        }else {
+                            confirm("创建订单失败"+data.message);
+                        }
+                        location.reload();
+                    })
+
+            }
+        }
+    </script>
+
+
+</div>
+</body>
+</html>

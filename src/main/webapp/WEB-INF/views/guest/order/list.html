@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/static/list.css}"/>
+</head>
+<body>
+<!--<p th:text="${pageInfo.list}"></p>-->
+<!--<a th:href="@{/admin/order}">刷新页面</a>-->
+<a th:href="@{/guest/mainpage.html}">返回菜单栏</a>
+<br/>
+<div th:replace="templates/guest/orderlist::
+                pageList(${pageKeySet},${pageInfo.list},'/guest/order/returnCharge','/guest/order/delete')"></div>
+
+
+
+</body>
+</html>

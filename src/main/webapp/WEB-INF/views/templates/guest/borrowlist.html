@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+
+<div th:fragment="pageList(pageKeySet, pageInfo,updateApi,deleteApi)" >
+    <p th:if="${pageKeySet} == 'EMPTY'">empty list</p>
+    <table th:if="${pageKeySet} != 'EMPTY'" class="table table-hover">
+        <thead>
+        <tr>
+            <th:block th:each="key :${pageKeySet}">
+                <th th:text="${key}">test</th>
+            </th:block>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${pageInfo}">
+            <th:block th:each="key :${pageKeySet}">
+                <td th:text="${user[key]}">neo</td>
+            </th:block>
+
+            <td><a id="borrow"
+                   th:onclick="|updatePassword('@{/guest/order/returnCharge}','${user.id}')|"
+                   th:href="'javascript:void(0)'">归还</a></td>
+
+        </tr>
+        </tbody>
+    </table>
+
+    <script type="text/javascript" th:inline="javascript">
+        function updatePassword(updateApi,userId)
+        {
+            var result=prompt("模拟归还\n"+"输入机柜id：","")
+
+            if (result!="")
+            {
+                result = parseInt(result);
+                fetch(updateApi,{
+                    method: 'POST',
+                    headers: {
+                        "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+                        'Accept':"application/x-www-form-urlencoded; charset=UTF-8"
+
+                    },
+                    body: 'orderId='+userId+'&cabinetId='+result
+                })
+                    .then(function (response) {
+                        if (!response.ok) {
+                            throw new Error('HTTP error! status: '+response.status);
+                        } else {
+                            return response.text();
+                        }
+                    })
+                    .then(function (data) {
+                        confirm(data);
+                        location.reload();
+                    })
+
+            }
+        }
+    </script>
+
+
+</div>
+</body>
+</html>

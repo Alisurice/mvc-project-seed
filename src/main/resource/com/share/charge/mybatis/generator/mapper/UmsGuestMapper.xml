@@ -67,6 +67,16 @@
   <sql id="Base_Column_List">
     id, username, password
   </sql>
+
+  <select id="login" parameterType="com.share.charge.mybatis.generator.model.UmsGuest" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from ums_guest
+    where password = #{password,jdbcType=INTEGER}
+    and username = #{username,jdbcType=VARCHAR}
+  </select>
+
+
   <select id="selectByExample" parameterType="com.share.charge.mybatis.generator.model.UmsGuestExample" resultMap="BaseResultMap">
     select
     <if test="distinct">

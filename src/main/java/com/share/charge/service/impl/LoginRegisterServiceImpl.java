@@ -1,8 +1,10 @@
 package com.share.charge.service.impl;
 
 import com.share.charge.dao.UmsAdminDao;
+import com.share.charge.dao.UmsGuestDao;
 import com.share.charge.dto.LoginRegisterDTO;
 import com.share.charge.mybatis.generator.mapper.UmsAdminMapper;
+import com.share.charge.mybatis.generator.mapper.UmsGuestMapper;
 import com.share.charge.mybatis.generator.model.UmsAdmin;
 import com.share.charge.mybatis.generator.model.UmsGuest;
 import com.share.charge.service.LoginRegisterService;
@@ -12,9 +14,19 @@ import javax.annotation.Resource;
 
 @Service("LoginRegisterService")
 public class LoginRegisterServiceImpl implements LoginRegisterService {
+
+    @Resource
+    private UmsGuestMapper umsGuestMapper;
     @Override
     public boolean guestLogin(UmsGuest umsGuest) {
-        return false;
+        UmsGuest temp = umsGuestMapper.login(umsGuest);
+        if(temp==null){
+            return false;
+        }
+        else {
+            umsGuest.setId(temp.getId());
+            return true;
+        }
     }
 
     @Resource
@@ -46,5 +58,23 @@ public class LoginRegisterServiceImpl implements LoginRegisterService {
             return new LoginRegisterDTO(false,"用户名已经存在");
         }
 
+    }
+
+
+    @Resource
+    private UmsGuestDao umsGuestDao;
+
+    @Override
+    public LoginRegisterDTO guestRegister(UmsGuest umsGuest) {
+        if(umsGuest.getUsername().isEmpty() || umsGuest.getPassword().isEmpty()){
+            return new LoginRegisterDTO(false,"用户名和密码不能为空");
+        }
+        else if(umsGuestDao.findUser(umsGuest.getUsername()) == null){
+            umsGuestMapper.insert(umsGuest);
+            return new LoginRegisterDTO(true,"注册成功");
+        }
+        else {
+            return new LoginRegisterDTO(false,"用户名已经存在");
+        }
     }
 }

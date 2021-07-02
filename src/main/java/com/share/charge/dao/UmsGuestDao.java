@@ -12,4 +12,7 @@ public interface UmsGuestDao {
 
     @Select("select username from ums_guest where username = #{username}")
     UmsGuest hasUser(@Param("username") String username);
+
+    @Select("select username from ums_guest where username = #{username}")
+    UmsGuest findUser(String username);
 }

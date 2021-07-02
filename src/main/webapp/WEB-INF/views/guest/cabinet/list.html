@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/static/list.css}"/>
+</head>
+<body>
+<!--<p th:text="${pageInfo.list}"></p>-->
+<a th:href="@{/guest/mainpage.html}">返回菜单栏</a>
+<a th:href="@{/guest/cabinet}">刷新页面</a>
+<div >
+    <form th:action="@{/guest/cabinet/search}" method="get">
+        <label>搜索相似位置</label>
+        <input type="text" name="position" th:value="${CABINET_SEARCH_POSITION}"/>
+        <input type="submit" value="筛选">
+    </form>
+</div>
+<br/>
+<div th:replace="templates/guest/chargelist::
+                pageList(${pageKeySet},${pageInfo},'/guest/cabinet/update','/guest/cabinet/delete')"></div>
+<p th:text="${resultMessage}"></p>
+<div th:replace="templates/guest/chargelist::currentPage(${pageInfo})">
+    page nation
+</div>
+<div th:replace="templates/guest/chargelist::pagenation('/guest/cabinet',${pageInfo})">
+    page nation
+</div>
+
+
+</body>
+</html>

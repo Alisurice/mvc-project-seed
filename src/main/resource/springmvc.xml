@@ -40,6 +40,9 @@
     </bean>
 
     <mvc:resources mapping="/static/**" location="/static/"/>
+
+    <!--    静态资源处理-->
+    <mvc:default-servlet-handler />
     <!-- 开启SpringMVC框架注解的支持 -->
     <mvc:annotation-driven/>
 </beans>
