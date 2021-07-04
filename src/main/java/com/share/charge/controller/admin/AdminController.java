@@ -5,6 +5,8 @@ import com.github.pagehelper.PageInfo;
 import com.share.charge.common.PageHelperUtil;
 import com.share.charge.mybatis.generator.model.UmsGuest;
 import com.share.charge.service.AdminService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,15 +15,18 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
+
 @Controller
 @RequestMapping("/admin")
 @SessionAttributes("GUEST_MANAGE_CURRENT_PAGE")
+@Api(value="用户controller",tags={"用户操作接口"})
 public class AdminController {
     private static final Logger LOGGER = Logger.getLogger(AdminController.class);
 
     @Autowired
     AdminService adminService;
 
+    @ApiOperation(value = "测试api", notes = "第一个测试")
     @RequestMapping(value = "/guest-manage",method = RequestMethod.GET)
     public String guestManage(Integer pageNum, Model model) throws IOException {
 

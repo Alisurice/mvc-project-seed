@@ -7,6 +7,7 @@ import com.share.charge.mybatis.generator.model.PmsCharge;
 import com.share.charge.service.AdminCabinetService;
 import com.share.charge.service.AdminService;
 import com.share.charge.vo.VoCabinetMes;
+import io.swagger.annotations.Api;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/admin/cabinet")
 @SessionAttributes({"CABINET_CURRENT_PAGE","CABINET_SEARCH_POSITION"})
+@Api(value="用户cont",tags={"用户接口"})
 public class CabinetController {
     private static final Logger LOGGER = Logger.getLogger(CabinetController.class);
 
